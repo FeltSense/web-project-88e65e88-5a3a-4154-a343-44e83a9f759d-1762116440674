@@ -1,0 +1,97 @@
+{
+  "componentsToGenerate": [
+    "Navigation",
+    "Hero",
+    "FeaturedDishes",
+    "QuickReservation",
+    "MenuSection",
+    "MenuItemCard",
+    "MenuFilters",
+    "OrderingCart",
+    "ReservationForm",
+    "LocationMap",
+    "Testimonials",
+    "AboutSection",
+    "ContactForm",
+    "Footer",
+    "OrderingInterface",
+    "TimeSlotPicker",
+    "CategoryNav"
+  ],
+  "estimatedChallenges": [
+    {
+      "component": "Navigation",
+      "challenge": "Sticky navigation with active state and mobile hamburger menu",
+      "mitigation": "Use 'use client' directive, useState for mobile menu toggle, proper z-index layering"
+    },
+    {
+      "component": "MenuSection",
+      "challenge": "Dynamic filtering and category switching with state management",
+      "mitigation": "Client component with useState for active category and filters, proper key props in map()"
+    },
+    {
+      "component": "OrderingCart",
+      "challenge": "Persistent cart state across components, add/remove items, quantity updates",
+      "mitigation": "Use Context API or prop drilling, client component with useState, localStorage for persistence"
+    },
+    {
+      "component": "ReservationForm",
+      "challenge": "Date/time validation, availability checking, form state management",
+      "mitigation": "Client component with controlled inputs, date validation logic, clear error messaging"
+    },
+    {
+      "component": "LocationMap",
+      "challenge": "Embedding interactive map without external dependencies initially",
+      "mitigation": "Use iframe embed for Google Maps, provide fallback static image, ensure responsive sizing"
+    },
+    {
+      "component": "MenuItemCard",
+      "challenge": "Consistent styling, image optimization, add-to-cart functionality",
+      "mitigation": "Reusable component with props, Next.js Image component, callback props for cart actions"
+    },
+    {
+      "component": "TimeSlotPicker",
+      "challenge": "Dynamic time slot generation based on restaurant hours and existing reservations",
+      "mitigation": "Client component with time calculation logic, disabled state for unavailable slots"
+    },
+    {
+      "component": "FeaturedDishes",
+      "challenge": "Image carousel/slider functionality without heavy libraries",
+      "mitigation": "CSS scroll-snap or simple useState-based slider, touch-friendly controls"
+    }
+  ],
+  "fixerContext": {
+    "expectedStructure": "Next.js 14+ App Router structure with app/ directory, separated components in components/ folder organized by feature (menu/, ordering/, reservations/, shared/), public/ for images",
+    "importPaths": "Use relative imports from app/page.tsx to components/, ensure proper 'use client' directives for interactive components",
+    "commonIssues": [
+      "Missing 'use client' directive on components with useState, useEffect, or event handlers",
+      "Import path mismatches between components/ and app/ directories",
+      "Image optimization - ensure Next.js Image component usage with proper width/height",
+      "Form handling - controlled vs uncontrolled inputs, proper event typing",
+      "Map() operations missing unique key props",
+      "CSS modules or Tailwind class conflicts",
+      "Async/await in client components without proper error boundaries",
+      "State management across ordering/cart components - consider Context API",
+      "Date/time handling - use proper Date objects and validation",
+      "Responsive design breakpoints - mobile-first approach"
+    ],
+    "keyFeaturesToImplement": [
+      "Functional (simulated) online ordering with cart management",
+      "Reservation form with date/time selection and validation",
+      "Filterable menu with categories and dietary options",
+      "Responsive navigation with mobile menu",
+      "Contact form with validation",
+      "Location section with embedded map",
+      "Testimonials/reviews section",
+      "Call-to-action buttons throughout for ordering and reservations"
+    ],
+    "dataStructures": {
+      "menuItem": "{ id, name, description, price, category, image, dietary: [], allergens: [], popular: boolean }",
+      "cartItem": "{ menuItem, quantity, customizations: [], subtotal }",
+      "reservation": "{ date, time, partySize, name, email, phone, specialRequests }",
+      "restaurantInfo": "{ name, address, phone, email, hours: {}, coordinates: {} }"
+    },
+    "stateManagement": "Use React Context for cart state (OrderContext), local useState for forms and UI interactions, consider useReducer for complex cart operations",
+    "styling": "Tailwind CSS for rapid development with custom color palette, ensure consistent spacing and typography scale, mobile-first responsive design"
+  }
+}
